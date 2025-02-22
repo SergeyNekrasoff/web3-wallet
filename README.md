@@ -6,19 +6,19 @@ This template should help get you started developing with Vue 3 in Vite.
 
 Installing MetaMask
 
-````Using Chrome Browser
+```Using Chrome Browser
 - Visit the Chrome Web Store
 - Search for "MetaMask"
 - Click "Add to Chrome"
 - Click "Add Extension" in the confirmation dialog
+```
 
 ```Using Firefox Browser
 - Visit the Firefox Add-ons store
 - Search for "MetaMask"
 - Click "Add to Firefox"
 - Click "Add" in the confirmation dialog
-
-
+```
 
 Please install MetaMask or another Ethereum provider
 
@@ -38,7 +38,7 @@ See [Vite Configuration Reference](https://vite.dev/config/).
 
 ```sh
 npm install
-````
+```
 
 ### Compile and Hot-Reload for Development
 
