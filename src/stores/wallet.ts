@@ -48,16 +48,30 @@ export const useWalletStore = defineStore('wallet', () => {
 
   const updateBalances = async () => {
     if (!state.value.address || !provider.value) return
+
     try {
+      const network = await provider.value.getNetwork()
+      const code = await provider.value.getCode(process.env.VUE_APP_TOKEN_ADDRESS!)
+
+      if (network.chainId !== 97n) {
+        throw new Error('Wrong network')
+      }
+
       state.value.bnbBalance = (await provider.value.getBalance(state.value.address)).toString()
 
+      if (code === '0x') {
+        throw new Error('Contract does not exist on this networkClick to apply')
+      }
+
+      console.log(`process.env.VUE_APP_TOKEN_ADDRESS: ${process.env.VUE_APP_TOKEN_ADDRESS}`)
+
       const tokenContract = new ethers.Contract(
-        '0x8a.....................651fB72bBc2', // replace token
-        ['function balanceOf(address account) view returns (uint256)'],
+        process.env.VUE_APP_TOKEN_ADDRESS!, // replace token
+        ['function balanceOf(0xeeeEB792D818e8F2c9B75A17f137851C6AB2F3dD) view returns (uint256)'],
         provider.value,
       )
 
-      state.value.tokenBalance = await tokenContract.balanceOf(state.value.address)
+      state.value.tokenBalance = await tokenContract.balanceOf(state.value.address).toString()
     } catch (error) {
       console.error('Error updating balances:', error)
     }
